@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
+use App\Models\Category;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -77,14 +80,84 @@ class AdminController extends Controller
 
     public function profile() {
 
-        
-        return view('front.account.profile');
+        $blogs = Blog::orderBy('created_at','DESC')->with('blogTag')->paginate(10);
+
+        return view('front.account.profile',[
+            'blogs' => $blogs
+        ]);
         
     }
 
     public function logout(){
         Auth::logout();
         return redirect()->route('account.login');
+    }
+
+    public function createBlog(){
+        //pozivanje kategorije i tagova
+        $categories = Category::orderBy('name','ASC')->where('status',1)->get();
+        $tag = Tag::orderBy('name','ASC')->where('status',1)->get();
+
+        return view('front.account.blog.create',[
+            'categories' => $categories,
+            'tag' => $tag
+        ]
+        );
+    }
+
+    public function saveBlog(Request $request){
+        
+        $rules = [
+            'title' => 'required|min:5|max:200',
+            'author' => 'required',
+            'brief' => 'required',
+            'category' => 'required',
+            'tag' => 'required'
+                    
+
+        ];
+
+        if($request->image !="")
+        {
+            $rules['image'] = 'image' ;
+        }
+
+        $validator = Validator::make($request->all(),$rules);
+
+        if($validator->fails()){
+            return redirect()->route('account.createBlog')->withInput()->withErrors($validator);
+        }
+
+
+        // here we will insert blog in db
+        $blog = new Blog();
+        $blog->title = $request->title;
+        $blog->category_id = $request->category;
+        $blog->tag_id = $request->tag;
+        $blog->author = $request->author;
+        $blog->brief = $request->brief;
+        $blog->image = "null";
+        $blog->save();
+
+        if($request->image !="")
+        {
+          //here we will store image
+          $image = $request ->image;
+          $ext = $image->getClientOriginalExtension();
+          $imageName = time().'.'.$ext; //Unique image name
+
+          //here we are saving image to public/uploads
+          $image->move(public_path('uploads'),$imageName);
+
+          //here the image will be saved in db
+          $blog -> image = $imageName;
+          $blog->save();
+        }
+
+
+        return redirect()->route('account.createBlog')->with('success','Blog added successfully');
+         
+       
     }
 
 }

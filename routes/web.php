@@ -26,5 +26,8 @@ Route::group(['middleware' => 'guest'], function(){
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/account/profile',[AdminController::class,'profile'])->name('account.profile');
     Route::get('/account/logout',[AdminController::class,'logout'])->name('account.logout');
+    Route::get('/account/create-blog',[AdminController::class,'createBlog'])->name('account.createBlog');
+    Route::post('/account/save-blog',[AdminController::class,'saveBlog'])->name('account.saveBlog');
+
 
 });
