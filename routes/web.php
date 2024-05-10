@@ -28,6 +28,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/account/logout',[AdminController::class,'logout'])->name('account.logout');
     Route::get('/account/create-blog',[AdminController::class,'createBlog'])->name('account.createBlog');
     Route::post('/account/save-blog',[AdminController::class,'saveBlog'])->name('account.saveBlog');
+    Route::get('/account/{blog}/edit-blog',[AdminController::class,'editBlog'])->name('account.editBlog');
+    Route::put('/account/{blog}',[AdminController::class,'update'])->name('account.update');
+    Route::delete('/account/profile/{blog}',[AdminController::class,'deleteBlog'])->name('account.deleteBlog');
+  
 
 
 });

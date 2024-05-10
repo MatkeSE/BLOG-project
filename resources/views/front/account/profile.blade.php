@@ -47,7 +47,11 @@
                 @foreach($blogs as $blog)
                 <tr>
                     <td>{{ $blog->id }}</td>
-                    <td></td>
+                    <td>
+                        @if($blog->image != "")
+                           <img width="65" src="{{ asset('uploads/'.$blog->image) }}" alt="">
+                        @endif
+                    </td>
                     <td>{{ $blog->title }}</td>
                     <td></td>
                     <td></td>
@@ -55,8 +59,13 @@
                     <td>{{ $blog->author }}</td>
                     <td>{{  \Carbon\Carbon::parse($blog->created_at)->format('d M, Y')}}</td>
                     <td>
-                        <a href="#" class="btn btn-dark">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
+                        <a href="{{ route('account.editBlog', $blog->id) }}" class="btn btn-dark">Edit</a>
+                        <a href="#" onclick="deleteBlog({{$blog->id}})" class="btn btn-danger">Delete
+                        <form id="delete-blog-from-{{$blog->id}}" action="{{ route('account.deleteBlog',$blog->id) }}" method="POST">
+                           @csrf
+                           @method('delete')
+                        </form>
+                    </a>
                     </td>
                 </tr>
                 @endforeach
@@ -88,3 +97,13 @@
 
 </body>
 </html>
+
+<script>
+      
+      function deleteBlog(id){
+   if(confirm("Are you sure you want to delete blog?")){
+      document.getElementById("delete-blog-from-"+id).submit();
+   }
+      }
+</script>
+    

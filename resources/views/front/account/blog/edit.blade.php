@@ -17,7 +17,7 @@
        @endif
 
      <div class="bg-dark py-3">
-       <h2 class="text-white text-center">ADD BLOG</h2>
+       <h2 class="text-white text-center">EDIT BLOG</h2>
      </div>
      <div class=container>
         <div class="row d-flex justify-content-center">
@@ -25,13 +25,14 @@
                 <div class="card border-0 shadow-lg my-3">
                     <div class="card-header">
                         <h3>Blog details</h3>
-                        <form enctype="multipart/form-data" action="{{ route('account.saveBlog') }}" method="POST">
+                        <form enctype="multipart/form-data" action="{{ route('account.update', $blog->id) }}" method="POST">
+                            @method('put')
                             @csrf
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
                             <label for="">Title</label>
-                            <input value="{{ old('title') }}" type="text" class="form-control @error('title') is-invalid @enderror form-control-lg"  name="title">
+                            <input value="{{ old('title', $blog->title) }}" type="text" class="form-control @error('title') is-invalid @enderror form-control-lg"  name="title">
                             @error('title')
                                 <p class="invalid-feedback">{{$message}}</p>
                             @enderror
@@ -62,14 +63,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="">Author</label>
-                        <input value="{{ old('author') }}" type="text" class="form-control @error('author') is-invalid @enderror form-control-lg" name="author">
+                        <input value="{{ old('author', $blog->author) }}" type="text" class="form-control @error('author') is-invalid @enderror form-control-lg" name="author">
                         @error('author')
                         <p class="invalid-feedback">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="">Brief</label>
-                        <textarea {{ old('brief') }} type="text" class="form-control @error('brief') is-invalid @enderror form-control-lg" name="brief">{{ old('brief') }}</textarea>
+                        <textarea  type="text" class="form-control @error('brief') is-invalid @enderror form-control-lg" name="brief">{{ old('brief', $blog->brief) }}</textarea>
                         @error('brief')
                         <p class="invalid-feedback">{{$message}}</p>
                         @enderror
@@ -77,9 +78,12 @@
                     <div class="mb-3">
                         <label for="">Image</label>
                         <input type="file" class="form-control form-control-lg" name="image">
+                        @if($blog->image != "")
+                           <img class='w-50 my-3' src="{{ asset('uploads/'.$blog->image) }}" alt="">
+                        @endif
                     </div>
                     <div class="d-grid">
-                        <button class="btn btn-lg btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-lg btn-primary">Update</button>
                     </div>
                 </form>
                 </div>
