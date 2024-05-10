@@ -25,96 +25,30 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6">
+                    
+
+
+            @if ($latestBlog->isNotEmpty())
+                @foreach ($latestBlog as $latestBlogs)
+                <div class="col-lg-6 col-md-6">
                         <div class="single-blog-grid-item"><!-- single blog grid item -->
                             <div class="thumb">
-                                <img src="assets/img/blog/01.jpg" alt="blog images">
+                                <img src="{{ asset('uploads/'.$latestBlogs->image) }}" alt="blog images">
                             </div>
                             <div class="content">
                                 <ul class="post-meta">
-                                    <li><a href="#">21 Aug, 2018 </a></li>
-                                    <li><a href="#">By Adam helen</a></li>
+                                    <li><a href="#">{{  \Carbon\Carbon::parse($latestBlogs->created_at)->format('d M, Y')}}</a></li>
+                                    <li><a href="#">{{ $latestBlogs->author }}</a></li>
                                 </ul>
-                                <h4 class="title"><a href="#">Mobile apps are becoming popular in 3rd world</a></h4>
-                                <a href="#" class="readmore">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
+                                <h4 class="title"><a href="#">{{ $latestBlogs->title }}</a></h4>
+                                <a href="#" class="readmore">read more <i class="fas fa-long-arrow-alt-right"></i></a>
                             </div>
                         </div><!-- //. single blog grid item -->
                     </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="single-blog-grid-item"><!-- single blog grid item -->
-                            <div class="thumb">
-                                <img src="assets/img/blog/02.jpg" alt="blog images">
-                            </div>
-                            <div class="content">
-                                <ul class="post-meta">
-                                    <li><a href="#">21 Aug, 2018 </a></li>
-                                    <li><a href="#">By Adam helen</a></li>
-                                </ul>
-                                <h4 class="title"><a href="#">Depart do be so he enough talent. Sociable for</a></h4>
-                                <a href="#" class="readmore">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div><!-- //. single blog grid item -->
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="single-blog-grid-item"><!-- single blog grid item -->
-                            <div class="thumb">
-                                <img src="assets/img/blog/03.jpg" alt="blog images">
-                            </div>
-                            <div class="content">
-                                <ul class="post-meta">
-                                    <li><a href="#">21 Aug, 2018 </a></li>
-                                    <li><a href="#">By Adam helen</a></li>
-                                </ul>
-                                <h4 class="title"><a href="#">At name no an what Pressed my by do affixed </a></h4>
-                                <a href="#" class="readmore">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div><!-- //. single blog grid item -->
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="single-blog-grid-item"><!-- single blog grid item -->
-                            <div class="thumb">
-                                <img src="assets/img/blog/04.jpg" alt="blog images">
-                            </div>
-                            <div class="content">
-                                <ul class="post-meta">
-                                    <li><a href="#">21 Aug, 2018 </a></li>
-                                    <li><a href="#">By Adam helen</a></li>
-                                </ul>
-                                <h4 class="title"><a href="#">Do am he horrible distance marriage so alth</a></h4>
-                                <a href="#" class="readmore">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div><!-- //. single blog grid item -->
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="single-blog-grid-item"><!-- single blog grid item -->
-                            <div class="thumb">
-                                <img src="assets/img/blog/05.jpg" alt="blog images">
-                            </div>
-                            <div class="content">
-                                <ul class="post-meta">
-                                    <li><a href="#">21 Aug, 2018 </a></li>
-                                    <li><a href="#">By Adam helen</a></li>
-                                </ul>
-                                <h4 class="title"><a href="#">His many same been well can high that did law</a></h4>
-                                <a href="#" class="readmore">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div><!-- //. single blog grid item -->
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="single-blog-grid-item"><!-- single blog grid item -->
-                            <div class="thumb">
-                                <img src="assets/img/blog/06.jpg" alt="blog images">
-                            </div>
-                            <div class="content">
-                                <ul class="post-meta">
-                                    <li><a href="#">21 Aug, 2018 </a></li>
-                                    <li><a href="#">By Adam helen</a></li>
-                                </ul>
-                                <h4 class="title"><a href="#">He into walk roof made tall cold he jelings</a></h4>
-                                <a href="#" class="readmore">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div><!-- //. single blog grid item -->
-                    </div>
+                @endforeach    
+            @endif            
+
+
                     <div class="col-lg-12">
                             <div class="blog-pagination margin-top-10"><!-- blog pagination -->
                                 <nav aria-label="Page navigation example">
@@ -137,9 +71,9 @@
 
                         <div class="widget widget_search"><!-- widget  -->
                             <h4 class="widget-title">Search</h4>
-                            <form action="blog.html" class="search-form">
+                            <form action="/blog/search" method="GET"   class="search-form">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search">
+                                    <input type="text"  name="search" class="form-control" placeholder="Search">
                                 </div>
                                 <button class="submit-btn" type="submit"><i class="fas fa-search"></i></button>
                             </form>
@@ -168,25 +102,7 @@
                                         <span class="time">June 20, 18</span>
                                         <h4 class="title"><a href="#">Aliquam eu mauris euismod lacus vel.</a></h4>
                                     </div>
-                                </li><!-- //. single popular post item -->
-                                <li class="single-popular-post-item"><!-- single popular post item -->
-                                    <div class="thumb">
-                                        <img src="assets/img/popular-post/02.jpg" alt="popular post image">
-                                    </div>
-                                    <div class="content">
-                                        <span class="time">June 20, 18</span>
-                                        <h4 class="title"><a href="#">Aliquam eu mauris euismod lacus vel.</a></h4>
-                                    </div>
-                                </li><!-- //. single popular post item -->
-                                <li class="single-popular-post-item"><!-- single popular post item -->
-                                    <div class="thumb">
-                                        <img src="assets/img/popular-post/03.jpg" alt="popular post image">
-                                    </div>
-                                    <div class="content">
-                                        <span class="time">June 20, 18</span>
-                                        <h4 class="title"><a href="#">Aliquam eu mauris euismod lacus vel.</a></h4>
-                                    </div>
-                                </li><!-- //. single popular post item -->
+                                </li>
     
                             </ul>
                         </div>
