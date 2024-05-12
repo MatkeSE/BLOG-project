@@ -25,6 +25,7 @@ Route::group(['middleware' => 'guest'], function(){
     Route::post('/account/authenticate',[AdminController::class,'authenticate'])->name('account.authenticate');
 });
 
+//routes that only admins can access
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/account/profile',[AdminController::class,'profile'])->name('account.profile');
     Route::get('/account/logout',[AdminController::class,'logout'])->name('account.logout');

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class HomeContoller extends Controller
@@ -15,10 +17,15 @@ class HomeContoller extends Controller
     public function blog(){
 
         $latestBlog = Blog::orderBy('created_at','ASC')->take(6)->get();
-        
+
+        $tags = Tag::get();
+
+        $categories = Category::get();
+
+        $popularBlog = Blog::where('isPopular',"1")->take(3)->get();
 
        
-        return view('front.blog',compact('latestBlog'));
+        return view('front.blog',compact('latestBlog', 'tags','categories','popularBlog'));
     }
 
     // This method shows us blog details
@@ -26,7 +33,7 @@ class HomeContoller extends Controller
         return view('front.blog_detail');
         
     }
-
+    // This method performs search
     public function search(Request $request){
         $search = $request->search;
 
@@ -37,8 +44,13 @@ class HomeContoller extends Controller
 
             })
             ->get();
-            
-            return view('front.blog',compact('latestBlog','search'));
+        $tags = Tag::get();
+
+        $categories = Category::get();
+        $popularBlog = Blog::where('isPopular',"1")->take(3)->get();
+
+            return view('front.blog',compact('latestBlog','search', 'tags','categories','popularBlog'));
     }
+
 }
     

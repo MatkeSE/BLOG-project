@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('author');
             $table->string('image')->default("1");
             $table->string('brief');
+            $table->string('isPopular')->default("1")->after('brief');
             $table->timestamps();
         });
     }
@@ -28,6 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blogs');
+        Schema::table('blogs', function (Blueprint $table) {
+            $table->dropColumn('isPopular');
+        });
     }
 };

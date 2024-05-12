@@ -52,14 +52,14 @@
                     <li class="current-menu-item">
                         <a href="">Home</a>
                     </li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#team">Team</a></li>
+                    <li><a style="background-color: black;" href="#about">About</a></li>
+                    <li><a style="background-color: black;" href="#pricing">Pricing</a></li>
+                    <li><a style="background-color: black;" href="#team">Team</a></li>
                     <li class="menu-item-has-children">
-                        <a href="#">Blog</a>
+                        <a style="background-color: black;" href="#">Blog</a>
                         <ul class="sub-menu">
-                            <li><a href="blog">Blog 01</a></li>
-                            <li><a href="blog_detail">Blog Details</a></li>
+                            <li><a style="background-color: black;" href="blog">Blog 01</a></li>
+                            <li><a style="background-color: black;" href="blog_detail">Blog Details</a></li>
                         </ul>
                     </li>
                     <li><a href="#contact">Contact</a></li>

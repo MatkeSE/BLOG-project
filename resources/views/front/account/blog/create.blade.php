@@ -40,7 +40,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label for="" class="mb-2">Category<span class="req"></span></label>
-                            <select name="category" id="category" class="form-control">
+                            <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
                                 <option value="">Select a Category</option>
                                 @if ($categories->isNotEmpty())
                                     @foreach ($categories as $category)
@@ -48,10 +48,13 @@
                                     @endforeach
                                 @endif
                             </select>
+                            @error('category')
+                            <p class="invalid-feedback">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="" class="mb-2">Tag<span class="req"></span></label>
-                            <select name="tag" id="tag" class="form-select">
+                            <select name="tag" id="tag" class="form-control @error('category') is-invalid @enderror">
                                 <option value="">Select Tag</option>
                                 @if ($tag->isNotEmpty())
                                     @foreach ($tag as $tag)
@@ -59,6 +62,9 @@
                                     @endforeach
                                 @endif
                             </select>
+                            @error('tag')
+                            <p class="invalid-feedback">{{$message}}</p>
+                            @enderror
                     </div>
                     <div class="mb-3">
                         <label for="">Author</label>
@@ -81,10 +87,12 @@
                     <div class="d-grid">
                         <button class="btn btn-lg btn-primary">Submit</button>
                     </div>
+
                 </form>
                 </div>
             </div>
         </div>
+        <a href="{{ route('account.profile') }}">Back to main menu</a>
      </div>
       
      

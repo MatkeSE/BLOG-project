@@ -50,19 +50,7 @@
 
 
                     <div class="col-lg-12">
-                            <div class="blog-pagination margin-top-10"><!-- blog pagination -->
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                                <i class="fas fa-chevron-right"></i>
-                                        </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div><!-- //. blog pagination -->
+                            
                     </div>
                 </div>
             </div>
@@ -82,40 +70,38 @@
                         <div class="widget widget_categories"><!-- widget  -->
                             <h4 class="widget-title">Categories</h4>
                             <ul>
-                                <li class="cat-item"><a href="#">Lifestyle</a></li>
-                                <li class="cat-item"><a href="#">Travel</a></li>
-                                <li class="cat-item"><a href="#">Fashion</a></li>
-                                <li class="cat-item"><a href="#">Music</a></li>
-                                <li class="cat-item"><a href="#">Branding</a></li>
-                                <li class="cat-item"><a href="#">History</a></li>
+                                @if ($categories->isNotEmpty())
+                                  @foreach ($categories as $c)
+                                    <li class="cat-item"><a href="#">{{ $c->name }}</a></li>
+                                  @endforeach
+                                @endif
+                                
                             </ul>
                         </div>
                         <div class="widget widget_popular_posts"><!-- widget  -->
                             <h4 class="widget-title">Popular Posts</h4>
                             <ul>
-    
+                              @foreach($popularBlog as $p)
                                 <li class="single-popular-post-item"><!-- single popular post item -->
                                     <div class="thumb">
-                                        <img src="assets/img/popular-post/01.jpg" alt="popular post image">
+                                        <img  width="65" src="{{ asset('uploads/'.$p->image) }}" alt="popular post image">
                                     </div>
                                     <div class="content">
-                                        <span class="time">June 20, 18</span>
-                                        <h4 class="title"><a href="#">Aliquam eu mauris euismod lacus vel.</a></h4>
+                                        <span class="time">{{  \Carbon\Carbon::parse($p->created_at)->format('d M, Y')}}</span>
+                                        <h4 class="title"><a href="#">{{ $p->title }}</a></h4>
                                     </div>
                                 </li>
-    
+                               @endforeach
                             </ul>
                         </div>
                         <div class="widget widget_tag_cloud"><!-- widget -->
                             <h4 class="widget-title">Tags</h4>
                             <div class="tagcloud">
-                                <a href="#">Events</a>
-                                <a href="#">Love</a>
-                                <a href="#">Story</a>
-                                <a href="#">Gift</a>
-                                <a href="#">Events</a>
-                                <a href="#">First Metting</a>
-                                <a href="#">Couple</a>
+                                @if ($tags->isNotEmpty())
+                                @foreach ($tags as $tag)
+                                <a href="#">{{ $tag->name }}</a>
+                                @endforeach
+                                @endif
                             </div>
                         </div>
     

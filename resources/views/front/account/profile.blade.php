@@ -19,7 +19,7 @@
            <a href="{{ route('account.createBlog') }}">
             <div class="card">
                 <div class="card-body text-center">
-                <i class="fas fa-plus-square fa-3x text-primary"></i><br>
+                <br>
                 <h4>Add Blog</h4>
                 ------------
                 </div>
@@ -46,6 +46,7 @@
                 @if($blogs->isNotEmpty())
                 @foreach($blogs as $blog)
                 <tr>
+                    
                     <td>{{ $blog->id }}</td>
                     <td>
                         @if($blog->image != "")
@@ -53,8 +54,8 @@
                         @endif
                     </td>
                     <td>{{ $blog->title }}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ $blog->category->name ?? 'FIX' }}</td>
+                    <td>{{ $blog->tag->name ?? 'FIX' }}</td>
                    
                     <td>{{ $blog->author }}</td>
                     <td>{{  \Carbon\Carbon::parse($blog->created_at)->format('d M, Y')}}</td>
