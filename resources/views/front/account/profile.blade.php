@@ -26,6 +26,29 @@
             </div>
             </a>
         </div>
+        <div class="col-md-3">
+            <a href="{{ route('account.createTag') }}">
+             <div class="card">
+                 <div class="card-body text-center">
+                 <br>
+                 <h4>Add Tag</h4>
+                 ------------
+                 </div>
+             </div>
+             </a>
+         </div>
+         <div class="col-md-3">
+            <a href="{{ route('account.createCategory') }}">
+             <div class="card">
+                 <div class="card-body text-center">
+                 <br>
+                 <h4>Add Category</h4>
+                 ------------
+                 </div>
+             </div>
+             </a>
+         </div>
+            
         <br><br>
 
 
@@ -73,11 +96,8 @@
                 @endif
              
             </table>
-          </div>
-
-        
-        
-            </a>
+           
+      
         </div>
     </div>
 </div>
@@ -102,9 +122,10 @@
 <script>
       
       function deleteBlog(id){
-   if(confirm("Are you sure you want to delete blog?")){
-      document.getElementById("delete-blog-from-"+id).submit();
-   }
+         if(confirm("Are you sure you want to delete blog?")){
+           document.getElementById("delete-blog-from-"+id).submit();
+          }
       }
+
+     
 </script>
-    

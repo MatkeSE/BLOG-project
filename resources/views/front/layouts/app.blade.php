@@ -58,7 +58,7 @@
                     <li class="menu-item-has-children">
                         <a style="background-color: black;" href="#">Blog</a>
                         <ul class="sub-menu">
-                            <li><a style="background-color: black;" href="blog">Blog 01</a></li>
+                            <li><a style="background-color: black;" href="{{ route('blog') }}">Blog 01</a></li>
                             <li><a style="background-color: black;" href="blog_detail">Blog Details</a></li>
                         </ul>
                     </li>

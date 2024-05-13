@@ -35,6 +35,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/account/{blog}',[AdminController::class,'update'])->name('account.update');
     Route::delete('/account/profile/{blog}',[AdminController::class,'deleteBlog'])->name('account.deleteBlog');
   
+    Route::get('/account/create-tag',[AdminController::class,'createTag'])->name('account.createTag');
+    Route::post('/account/save-tag',[AdminController::class,'saveTag'])->name('account.saveTag');
+
+    Route::get('/account/create-category',[AdminController::class,'createCategory'])->name('account.createCategory');
+    Route::post('/account/save-category',[AdminController::class,'saveCategory'])->name('account.saveCategory');
 
 
 });

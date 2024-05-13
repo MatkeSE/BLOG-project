@@ -54,7 +54,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="mb-2">Tag<span class="req"></span></label>
-                            <select name="tag" id="tag" class="form-control @error('category') is-invalid @enderror">
+                            <select name="tag" id="tag" class="form-control @error('tag') is-invalid @enderror">
                                 <option value="">Select Tag</option>
                                 @if ($tag->isNotEmpty())
                                     @foreach ($tag as $tag)

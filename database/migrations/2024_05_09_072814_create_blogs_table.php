@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('author');
             $table->string('image')->default("1");
             $table->string('brief');
-            $table->string('isPopular')->default("1")->after('brief');
+            $table->string('isPopular')->default("1");
             $table->timestamps();
         });
     }

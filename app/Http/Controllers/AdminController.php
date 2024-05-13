@@ -87,8 +87,13 @@ class AdminController extends Controller
 
         // return view('front.account.profile', compact('blogs','categories'));
 
+        $tags = Tag::orderBy('created_at','DESC')->get();
+        $categories = Category::orderBy('created_at','DESC')->get();
+
         return view('front.account.profile', [
-            'blogs' => $blogs
+            'blogs' => $blogs,
+            'categories' => $categories,
+            'tags' => $tags
         ]);
         
     }
@@ -197,14 +202,8 @@ class AdminController extends Controller
         ])->first();
         if($blog == null){abort(404);}
 
-        //pozivanje kategorije i tagova i blogova
-        $categories = Category::orderBy('name','ASC')->where('status',1)->get();
-        $tag = Tag::orderBy('name','ASC')->where('status',1)->get();
-
         $rules = [
             'title' => 'required|min:5|max:200',
-            'author' => 'required',
-            'brief' => 'required',
             'category' => 'required',
             'tag' => 'required'
                     
@@ -263,6 +262,69 @@ class AdminController extends Controller
         $blog->delete();
 
         return redirect()->route('account.profile')->with('success','Blog deleted successfully');
+    }
+
+    public function createTag(){
+        
+
+        return view('front.account.tag.create');
+    }
+
+    public function saveTag(Request $request){
+        
+        $rules = [
+            'name' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(),$rules);
+
+        if($validator->fails()){
+            return redirect()->route('account.createTag')->withInput()->withErrors($validator);
+        }
+
+
+        // here we will insert blog in db
+        $tag = new Tag();
+        $tag->name = $request->name;
+        $tag->save();
+
+
+        return redirect()->route('account.createTag')->with('success','Tag added successfully');
+         
+       
+    }
+    
+
+  
+
+    public function createCategory(){
+        
+
+        return view('front.account.category.create');
+    }
+
+    public function saveCategory(Request $request){
+        
+        $rules = [
+            'name' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(),$rules);
+
+        if($validator->fails()){
+            return redirect()->route('account.createCategory')->withInput()->withErrors($validator);
+        }
+
+
+        // here we will insert blog in db
+        $c = new Category();
+        $c->name = $request->name;
+        $c->save();
+
+
+        return redirect()->route('account.createCategory')->with('success','Category added successfully');
+         
+       
     }
 
 }
