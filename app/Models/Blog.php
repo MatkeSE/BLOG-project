@@ -10,11 +10,11 @@ class Blog extends Model
     use HasFactory;
     
 
-    public function blogTag()
+    public function tag()
     {
         return $this->belongsTo(Tag::class);
     }
-    public function blogCategory()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }

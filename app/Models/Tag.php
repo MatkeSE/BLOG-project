@@ -11,8 +11,6 @@ class Tag extends Model
     
     public function tag()
     {
-
-      
         return $this->hasMany(Blog::class,'tag_id','id');
     }
 

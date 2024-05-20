@@ -77,8 +77,8 @@
                         @endif
                     </td>
                     <td>{{ $blog->title }}</td>
-                    <td>{{ $blog->category->name ?? 'FIX' }}</td>
-                    <td>{{ $blog->tag->name ?? 'FIX' }}</td>
+                    <td>{{ $blog->tag->name}}</td>
+                    <td>{{ $blog->category->name }}</td>
                    
                     <td>{{ $blog->author }}</td>
                     <td>{{  \Carbon\Carbon::parse($blog->created_at)->format('d M, Y')}}</td>

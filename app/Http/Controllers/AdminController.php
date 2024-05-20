@@ -81,19 +81,11 @@ class AdminController extends Controller
     
     public function profile() {
 
-        $blogs = Blog::orderBy('created_at','DESC')->with('blogTag','blogCategory')->get();
-        
-        // $categories = Category::with('blog')->get();
-
-        // return view('front.account.profile', compact('blogs','categories'));
-
-        $tags = Tag::orderBy('created_at','DESC')->get();
-        $categories = Category::orderBy('created_at','DESC')->get();
+        $blogs = Blog::with('tag')->with('category')->orderBy('created_at','DESC')->get();
+  
 
         return view('front.account.profile', [
             'blogs' => $blogs,
-            'categories' => $categories,
-            'tags' => $tags
         ]);
         
     }
