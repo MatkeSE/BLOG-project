@@ -18,28 +18,28 @@ Route::get('/blog_detail',[HomeContoller::class,'blogDetail'])->name('blog_detai
 
 
 
-Route::group(['middleware' => 'guest'], function(){
-    Route::get('/account/register',[AdminController::class,'registration'])->name('account.registration');
-    Route::post('/account/process-register',[AdminController::class,'processRegistration'])->name('account.processRegistration');
-    Route::get('/account/login',[AdminController::class,'login'])->name('account.login');
-    Route::post('/account/authenticate',[AdminController::class,'authenticate'])->name('account.authenticate');
-});
+// Route::group(['middleware' => 'guest'], function(){
+//     Route::get('/account/register',[AdminController::class,'registration'])->name('account.registration');
+//     Route::post('/account/process-register',[AdminController::class,'processRegistration'])->name('account.processRegistration');
+//     Route::get('/account/login',[AdminController::class,'login'])->name('account.login');
+//     Route::post('/account/authenticate',[AdminController::class,'authenticate'])->name('account.authenticate');
+// });
 
-//routes that only admins can access
-Route::group(['middleware' => 'auth'], function(){
-    Route::get('/account/profile',[AdminController::class,'profile'])->name('account.profile');
-    Route::get('/account/logout',[AdminController::class,'logout'])->name('account.logout');
-    Route::get('/account/create-blog',[AdminController::class,'createBlog'])->name('account.createBlog');
-    Route::post('/account/save-blog',[AdminController::class,'saveBlog'])->name('account.saveBlog');
-    Route::get('/account/{blog}/edit-blog',[AdminController::class,'editBlog'])->name('account.editBlog');
-    Route::put('/account/{blog}',[AdminController::class,'update'])->name('account.update');
-    Route::delete('/account/profile/{blog}',[AdminController::class,'deleteBlog'])->name('account.deleteBlog');
+// //routes that only admins can access
+// Route::group(['middleware' => 'auth'], function(){
+//     Route::get('/account/profile',[AdminController::class,'profile'])->name('account.profile');
+//     Route::get('/account/logout',[AdminController::class,'logout'])->name('account.logout');
+//     Route::get('/account/create-blog',[AdminController::class,'createBlog'])->name('account.createBlog');
+//     Route::post('/account/save-blog',[AdminController::class,'saveBlog'])->name('account.saveBlog');
+//     Route::get('/account/{blog}/edit-blog',[AdminController::class,'editBlog'])->name('account.editBlog');
+//     Route::put('/account/{blog}',[AdminController::class,'update'])->name('account.update');
+//     Route::delete('/account/profile/{blog}',[AdminController::class,'deleteBlog'])->name('account.deleteBlog');
   
-    Route::get('/account/create-tag',[AdminController::class,'createTag'])->name('account.createTag');
-    Route::post('/account/save-tag',[AdminController::class,'saveTag'])->name('account.saveTag');
+//     Route::get('/account/create-tag',[AdminController::class,'createTag'])->name('account.createTag');
+//     Route::post('/account/save-tag',[AdminController::class,'saveTag'])->name('account.saveTag');
 
-    Route::get('/account/create-category',[AdminController::class,'createCategory'])->name('account.createCategory');
-    Route::post('/account/save-category',[AdminController::class,'saveCategory'])->name('account.saveCategory');
+//     Route::get('/account/create-category',[AdminController::class,'createCategory'])->name('account.createCategory');
+//     Route::post('/account/save-category',[AdminController::class,'saveCategory'])->name('account.saveCategory');
 
 
-});
+// });
